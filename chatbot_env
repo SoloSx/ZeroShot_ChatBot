@@ -1,0 +1,15 @@
+# New Sakuto's Dockerfile(2023.09.07)
+FROM ubuntu:22.04
+
+## apt-getのインタラクティブプロンプトを無効にする
+ENV DEBIAN_FRONTEND=noninteractive
+## sudo インストール
+RUN apt update && apt install -y sudo
+RUN sudo apt upgrade -y
+## Python インストール
+RUN apt-get update && apt-get install -y python3.9 python3-pip
+## 以下、Pythonのライブラリをインストール
+RUN sudo apt-get install -yq --no-install-recommends mecab mecab-ipadic-utf8 libmecab-dev swig
+RUN pip install jupyter numpy pandas transformers matplotlib japanize-matplotlib mecab-python3
+## gitインストール
+RUN sudo apt-get install git -y
